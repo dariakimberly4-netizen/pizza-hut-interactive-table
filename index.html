@@ -5,17 +5,17 @@
 <title>Pizza Hut Interactive Table — Concept</title>
 <style>
 *{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#100805;color:#fff;font-family:Inter,Arial,sans-serif}body{overflow-x:hidden}
-.scene{min-height:100vh;position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;padding:22px 14px 30px;background:linear-gradient(#0b0604 0 13%,#1b0e08 13.2%,#28150b 100%)}
+.scene{min-height:100vh;position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;padding:22px 14px 30px;background:radial-gradient(circle at 18% 7%,rgba(255,174,79,.22) 0 1.2%,transparent 3%),radial-gradient(circle at 79% 8%,rgba(255,153,61,.18) 0 1%,transparent 3%),radial-gradient(circle at 61% 5%,rgba(255,201,130,.11) 0 .8%,transparent 2.5%),linear-gradient(#090504 0 13%,#1b0e08 13.2%,#28150b 100%)}
 .scene:before{content:"";position:absolute;inset:13% -12% -12%;background:radial-gradient(ellipse at 50% 22%,rgba(255,174,92,.16),transparent 35%),linear-gradient(91deg,transparent 0 7%,rgba(0,0,0,.16) 7.5%,transparent 8%,transparent 21%,rgba(255,255,255,.018) 21.5%,transparent 22%,transparent 44%,rgba(0,0,0,.13) 44.5%,transparent 45%,transparent 69%,rgba(255,255,255,.014) 69.5%,transparent 70%),repeating-linear-gradient(1deg,rgba(0,0,0,.09) 0 1px,transparent 1px 28px);transform:perspective(850px) rotateX(7deg);transform-origin:top;pointer-events:none}
 .scene:after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 47%,transparent 15%,rgba(0,0,0,.5) 88%);pointer-events:none}
 .brand{z-index:3;position:absolute;left:20px;top:20px;opacity:.18;transform:rotate(-1deg)}.brand b{font-size:11px;letter-spacing:.18em;text-shadow:0 1px #000}.brand b span{color:#b88778}.brand small{display:none}
-.cartBtn{position:absolute;right:14px;top:14px;z-index:6;border:1px solid #ffffff18;background:#140b08a8;color:#d9cbc4;border-radius:999px;min-height:38px;padding:0 14px;font-size:10px;font-weight:800;letter-spacing:.08em;cursor:pointer}
+.cartBtn{position:absolute;right:18px;top:18px;z-index:6;border:0;background:transparent;color:#8d7164;min-height:34px;padding:0 6px;font-size:10px;font-weight:800;letter-spacing:.12em;cursor:pointer;text-shadow:0 -1px #000;opacity:.72}.cartBtn:before{content:"▱";font-size:16px;margin-right:7px;vertical-align:-1px}
 .stage{z-index:2;width:min(1000px,100%);flex:1;display:grid;place-items:center;position:relative;padding:10px 0 0}
 .card{position:absolute;z-index:4;top:7%;left:50%;transform:translateX(-50%);width:90%;text-align:center;pointer-events:none;padding:0;background:none;border:0;opacity:.9}.eyebrow{font-size:9px;letter-spacing:.24em;color:#c8aaa0}.card h1{font-size:clamp(20px,3vw,31px);line-height:1;margin:6px 0 5px;color:#c39a86;letter-spacing:.07em;text-shadow:0 -1px #000,0 1px rgba(255,220,195,.1)}.card .desc{display:none}.price{font-size:clamp(17px,2.5vw,24px);font-weight:850;color:#c39a86;margin-top:0;text-shadow:0 -1px #000}
 .food{position:relative;width:min(88vw,760px);height:min(65vh,620px);display:grid;place-items:center;cursor:zoom-in;margin-top:35px;transition:.3s ease}
 .food:after{content:"";position:absolute;width:62%;height:8%;bottom:12%;border-radius:50%;background:#000d;filter:blur(22px);z-index:-1;transition:opacity .32s,transform .36s}
 .food img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 30px 25px #000d) saturate(1.12) contrast(1.05);transform:perspective(850px) rotateX(7deg);transition:transform .36s cubic-bezier(.2,.8,.2,1),opacity .25s}
-.food.swap img{transform:perspective(850px) rotateX(7deg) scale(.88) translateY(8px);opacity:0}.food.swap:after{opacity:.2;transform:scale(.8)}
+.food img[data-kind="pizza"]{scale:1.08}.food img[data-kind="pasta"]{scale:.88}.food img[data-kind="chicken"]{scale:.92}.food img[data-kind="bread"]{scale:.82}.food img[data-kind="dessert"]{scale:.84}.food.swap img{transform:perspective(850px) rotateX(7deg) scale(.88) translateY(8px);opacity:0}.food.swap:after{opacity:.2;transform:scale(.8)}
 .controls{z-index:4;display:flex;gap:clamp(25px,7vw,72px);justify-content:center;align-items:flex-start;margin-top:-4px}
 .controlUnit{text-align:center;color:#8e756a;font-size:8px;letter-spacing:.19em;font-weight:800}.controls button{width:68px;height:68px;border-radius:50%;border:0;background:radial-gradient(circle at 50% 55%,rgba(15,7,5,.42),rgba(43,22,14,.18) 68%);box-shadow:inset 0 5px 12px #000b,inset 0 -1px 2px rgba(255,220,190,.08),0 1px 0 rgba(255,220,190,.035);color:#9d8174;font-size:17px;cursor:pointer;display:grid;place-items:center;margin-bottom:8px;transition:.12s}
 .controls button:active{transform:translateY(3px) scale(.96);box-shadow:inset 0 5px 12px #000c,0 0 18px #e3183730}.controls .primary{border-color:#e3183748;color:#fff}
@@ -37,7 +37,7 @@
 <article class="card"><div class="eyebrow" id="cat"></div><h1 id="name"></h1><div class="desc" id="desc"></div><div class="price" id="price"></div></article>
 <div class="food" id="food" role="button" tabindex="0" aria-label="Enlarge featured food"><img id="img" alt=""></div>
 </section>
-<nav class="controls" aria-label="Menu controls"><div class="controlUnit"><button id="prev" aria-label="Previous">◀</button>PREVIOUS</div><div class="controlUnit"><button id="play" class="primary" aria-label="Pause">Ⅱ</button><span id="playLabel">PAUSE</span></div><div class="controlUnit"><button id="next" aria-label="Next">▶</button>NEXT</div></nav><button class="orderAction" id="customize">CUSTOMIZE · ORDER</button>
+<nav class="controls" aria-label="Menu controls"><div class="controlUnit"><button id="prev" aria-label="Previous">◀</button>PREVIOUS</div><div class="controlUnit"><button id="play" class="primary" aria-label="Play">▶</button><span id="playLabel">PLAY</span></div><div class="controlUnit"><button id="next" aria-label="Next">▶</button>NEXT</div></nav><button class="orderAction" id="customize">CUSTOMIZE · ORDER</button>
 <div class="dots" id="dots"></div>
 <div class="notice">Unofficial interactive ordering concept · Demo only · Not affiliated with or operated by Pizza Hut.</div>
 </main>
@@ -53,20 +53,21 @@ const items=[
 {name:"Garlic Bread",cat:"SIDES",price:169,desc:"Toasty garlic bread with a buttery finish.",img:"https://images.unsplash.com/photo-1573140401552-3fab0b24306f?auto=format&fit=crop&w=900&q=85",sizes:["Regular","Sharing"]},
 {name:"Chocolate Dessert",cat:"DESSERT",price:199,desc:"A rich chocolate finish to your table order.",img:"https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=900&q=85",sizes:["Solo","Sharing"]}
 ];
-let i=0,playing=true,timer,qty=1,size="",cart=[];
+let i=0,playing=false,timer,qty=1,size="",cart=[];
 const $=id=>document.getElementById(id);
 function render(){
- const x=items[i]; $("name").textContent=x.name;$("cat").textContent=x.cat+" · FEATURED";$("desc").textContent=x.desc;$("price").textContent="₱"+x.price.toLocaleString();$("img").src=x.img;$("img").alt=x.name;
+ const x=items[i]; $("name").textContent=x.name;$("cat").textContent=x.cat+" · FEATURED";$("desc").textContent=x.desc;$("price").textContent="₱"+x.price.toLocaleString();$("img").src=x.img;$("img").alt=x.name;const n=x.name.toLowerCase();$("img").dataset.kind=x.cat==="PIZZA"?"pizza":n.includes("pasta")?"pasta":n.includes("chicken")?"chicken":n.includes("bread")?"bread":"dessert";
  $("dots").innerHTML=items.map((_,n)=>'<span class="dot '+(n===i?'on':'')+'"></span>').join("");
 }
-function move(d){$("food").classList.add("swap");setTimeout(()=>{i=(i+d+items.length)%items.length;render();setTimeout(()=>$("food").classList.remove("swap"),70)},280)}
+function tactile(){if(navigator.vibrate)navigator.vibrate(12)}
+function move(d){tactile();$("food").classList.add("swap");setTimeout(()=>{i=(i+d+items.length)%items.length;render();setTimeout(()=>$("food").classList.remove("swap"),70)},280)}
 function restart(){clearInterval(timer);if(playing)timer=setInterval(()=>move(1),4500)}
 $("prev").onclick=()=>{move(-1);restart()};$("next").onclick=()=>{move(1);restart()};
-$("play").onclick=()=>{playing=!playing;$("play").textContent=playing?"Ⅱ":"▶";$("playLabel").textContent=playing?"PAUSE":"PLAY";restart()};
+$("play").onclick=()=>{tactile();playing=!playing;$("play").textContent=playing?"Ⅱ":"▶";$("playLabel").textContent=playing?"PAUSE":"PLAY";restart()};
 function openImage(){const x=items[i];$("bigImg").src=x.img;$("bigImg").alt=x.name;$("imageViewer").classList.add("open");clearInterval(timer)}
 $("imageViewer").onclick=()=>{$("imageViewer").classList.remove("open");restart()};
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&$("imageViewer").classList.contains("open")){$("imageViewer").classList.remove("open");restart()}});
-$("customize").onclick=openDetail;
+$("customize").onclick=()=>{tactile();openDetail()};
 function openDetail(){const x=items[i];qty=1;size=x.sizes[0];$("mName").textContent=x.name;$("mDesc").textContent=x.desc;$("qty").textContent=qty;$("sizes").innerHTML=x.sizes.map((s,n)=>'<span class="choice '+(!n?'selected':'')+'" data-size="'+s+'">'+s+'</span>').join("");$("detail").classList.add("open")}
 $("food").onclick=e=>{e.stopPropagation();openImage()};$("food").onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();e.stopPropagation();openImage()}};
 $("sizes").onclick=e=>{if(!e.target.dataset.size)return;size=e.target.dataset.size;[...$("sizes").children].forEach(x=>x.classList.toggle("selected",x===e.target))};
