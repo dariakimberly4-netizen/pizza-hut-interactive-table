@@ -46,7 +46,7 @@ function openImage(){const x=items[i];$("bigImg").src=x.img;$("bigImg").alt=x.na
 $("imageViewer").onclick=()=>{$("imageViewer").classList.remove("open");restart()};
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&$("imageViewer").classList.contains("open")){$("imageViewer").classList.remove("open");restart()}});
 function openDetail(){const x=items[i];qty=1;size=x.sizes[0];$("mName").textContent=x.name;$("mDesc").textContent=x.desc;$("qty").textContent=qty;$("sizes").innerHTML=x.sizes.map((s,n)=>'<span class="choice '+(!n?'selected':'')+'" data-size="'+s+'">'+s+'</span>').join("");$("detail").classList.add("open")}
-$("food").onclick=openImage;$("food").onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();openImage()}};
+$("food").onclick=e=>{e.stopPropagation();openImage()};$("food").onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();e.stopPropagation();openImage()}};
 $("sizes").onclick=e=>{if(!e.target.dataset.size)return;size=e.target.dataset.size;[...$("sizes").children].forEach(x=>x.classList.toggle("selected",x===e.target))};
 $("minus").onclick=()=>{$("qty").textContent=qty=Math.max(1,qty-1)};$("plus").onclick=()=>{$("qty").textContent=qty=Math.min(20,qty+1)};
 $("add").onclick=()=>{cart.push({...items[i],qty,size});$("count").textContent=cart.reduce((a,x)=>a+x.qty,0);$("detail").classList.remove("open");toast("Added to your table order");renderCart()};
