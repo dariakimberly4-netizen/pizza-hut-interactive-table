@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pizza Hut Interactive Table — Concept</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#120b08;color:#fff;font-family:Inter,Arial,sans-serif;min-height:100vh;overflow-x:hidden}.scene{min-height:100vh;position:relative;background:radial-gradient(circle at 50% 4%,rgba(255,166,80,.28),transparent 31%),linear-gradient(#17100d 0 26%,#301a10 27%,#160b07 100%);display:flex;flex-direction:column;align-items:center;padding:28px 18px 34px}.scene:after{content:"";position:absolute;inset:27% 0 0;background:repeating-linear-gradient(91deg,transparent 0 100px,rgba(255,255,255,.025) 101px 102px);pointer-events:none}.brand{z-index:2;text-align:center}.brand b{font-size:clamp(24px,4vw,44px);letter-spacing:.04em}.brand b span{color:#e31837}.brand small{display:block;color:#c8b7aa;margin-top:6px;letter-spacing:.18em}.phone{z-index:2;margin:20px 0 8px;width:128px;height:80px;border:5px solid #151515;border-radius:13px;background:linear-gradient(135deg,#9b1023,#e31837);display:grid;place-items:center;box-shadow:0 15px 35px #0008;transform:perspective(500px) rotateX(8deg)}.phone div{text-align:center;font-size:11px}.phone strong{font-size:17px}.stage{z-index:2;width:min(880px,100%);display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,1.2fr);align-items:center;gap:28px;margin-top:10px}.card{background:#20130fcc;border:1px solid #ffffff26;backdrop-filter:blur(14px);border-radius:22px;padding:24px;box-shadow:0 20px 50px #0007}.eyebrow{font-size:11px;letter-spacing:.18em;color:#e9b9a9}.card h1{font-size:clamp(28px,5vw,54px);line-height:.95;margin:10px 0 12px}.desc{color:#d6c8c1;line-height:1.55}.price{font-size:30px;font-weight:800;margin-top:18px}.food{position:relative;min-height:340px;display:grid;place-items:center;cursor:pointer}.food img{width:min(100%,480px);height:330px;object-fit:cover;border-radius:50%;filter:drop-shadow(0 30px 24px #000b);transition:.32s ease}.food.swap img{transform:scale(.92);opacity:0}.tap{position:absolute;bottom:4px;background:#17100de6;border:1px solid #ffffff2b;border-radius:999px;padding:9px 14px;font-size:12px}.controls{z-index:3;margin-top:24px;display:flex;gap:12px;flex-wrap:wrap;justify-content:center}.controls button,.cartBtn,.modal button{min-height:48px;border-radius:999px;border:1px solid #ffffff30;background:#20130f;color:white;padding:0 20px;font-weight:750;cursor:pointer}.controls button:hover,.modal button:hover{background:#352019}.controls .primary,.modal .primary{background:#e31837;border-color:#e31837}.cartBtn{position:absolute;right:20px;top:20px;z-index:5}.dots{z-index:3;display:flex;gap:7px;margin-top:16px}.dot{width:7px;height:7px;border-radius:50%;background:#765d54}.dot.on{background:#fff}.notice{z-index:2;color:#a9958c;font-size:11px;margin-top:18px;text-align:center}.modalWrap{position:fixed;inset:0;background:#000b;z-index:20;display:none;place-items:center;padding:18px}.modalWrap.open{display:grid}.modal{width:min(520px,100%);max-height:90vh;overflow:auto;background:#21130f;border:1px solid #ffffff25;border-radius:24px;padding:25px}.modal h2{margin:0 0 8px}.row{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}.choice{border:1px solid #ffffff2b;padding:10px 13px;border-radius:12px;cursor:pointer}.choice.selected{border-color:#e31837;background:#e3183720}.qty{display:flex;align-items:center;gap:16px}.qty button{width:46px;padding:0}.close{float:right}.cartList{display:grid;gap:10px;margin:16px 0}.cartItem{display:flex;justify-content:space-between;border-bottom:1px solid #ffffff1f;padding-bottom:10px}.total{font-size:22px;font-weight:800}.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(30px);opacity:0;background:#fff;color:#15100d;padding:11px 17px;border-radius:999px;z-index:30;transition:.25s}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@media(max-width:700px){.scene{padding-top:22px}.cartBtn{position:relative;right:auto;top:auto;align-self:flex-end;margin-bottom:4px}.stage{grid-template-columns:1fr;gap:2px}.card{order:2;text-align:center;padding:18px}.food{order:1;min-height:285px}.food img{height:275px}.phone{margin:8px 0 0;width:110px;height:68px}.controls{margin-top:16px}.controls button{padding:0 15px}.brand small{font-size:9px}}
+</style></head>
+<body>
+<main class="scene">
+<button class="cartBtn" id="cartBtn">ORDER · <span id="count">0</span></button>
+<div class="brand"><b>PIZZA <span>HUT</span></b><small>INTERACTIVE TABLE · CONCEPT</small></div>
+<div class="phone"><div><strong>PIZZA HUT</strong><br>Good food. Good moments.</div></div>
+<section class="stage">
+<article class="card"><div class="eyebrow" id="cat"></div><h1 id="name"></h1><div class="desc" id="desc"></div><div class="price" id="price"></div></article>
+<div class="food" id="food" role="button" tabindex="0" aria-label="Customize featured food"><img id="img" alt=""><span class="tap">TAP FOOD TO CUSTOMIZE</span></div>
+</section>
+<nav class="controls" aria-label="Menu controls"><button id="prev">◀ PREVIOUS</button><button id="play" class="primary">Ⅱ PAUSE</button><button id="next">NEXT ▶</button></nav>
+<div class="dots" id="dots"></div>
+<div class="notice">Unofficial interactive ordering concept · Demo only · Not affiliated with or operated by Pizza Hut.</div>
+</main>
+<div class="modalWrap" id="detail"><div class="modal"><button class="close" data-close="detail">✕</button><div class="eyebrow">CUSTOMIZE ORDER</div><h2 id="mName"></h2><p id="mDesc" class="desc"></p><strong>Size</strong><div class="row" id="sizes"></div><strong>Quantity</strong><div class="qty"><button id="minus">−</button><b id="qty">1</b><button id="plus">+</button></div><div class="row"><button class="primary" id="add">ADD TO ORDER</button><button data-close="detail">CANCEL</button></div></div></div>
+<div class="modalWrap" id="cart"><div class="modal"><button class="close" data-close="cart">✕</button><div class="eyebrow">YOUR TABLE ORDER</div><h2>Order Summary</h2><div class="cartList" id="cartList"></div><div class="total" id="total"></div><div class="row"><button class="primary" id="checkout">DEMO CHECKOUT</button><button data-close="cart">CONTINUE BROWSING</button></div></div></div>
+<div class="toast" id="toast"></div>
+<script>
+const items=[
+{name:"Pepperoni Supreme",cat:"PIZZA",price:549,desc:"A loaded pepperoni pizza concept with melted cheese and a crisp golden crust.",img:"https://images.unsplash.com/photo-1579751626657-72bc17010498?auto=format&fit=crop&w=900&q=85",sizes:["Regular","Large","Family"]},
+{name:"Cheese Lovers",cat:"PIZZA",price:499,desc:"Rich, melty cheese over a classic tomato base for a simple crowd favorite.",img:"https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=900&q=85",sizes:["Regular","Large","Family"]},
+{name:"Creamy Pasta",cat:"PASTA",price:229,desc:"Comforting creamy pasta served warm for the table.",img:"https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=900&q=85",sizes:["Solo","Sharing"]},
+{name:"Crispy Chicken",cat:"CHICKEN",price:349,desc:"Crispy, savory chicken made for sharing alongside pizza.",img:"https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&w=900&q=85",sizes:["4 pcs","6 pcs","8 pcs"]},
+{name:"Garlic Bread",cat:"SIDES",price:169,desc:"Toasty garlic bread with a buttery finish.",img:"https://images.unsplash.com/photo-1573140401552-3fab0b24306f?auto=format&fit=crop&w=900&q=85",sizes:["Regular","Sharing"]},
+{name:"Chocolate Dessert",cat:"DESSERT",price:199,desc:"A rich chocolate finish to your table order.",img:"https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=900&q=85",sizes:["Solo","Sharing"]}
+];
+let i=0,playing=true,timer,qty=1,size="",cart=[];
+const $=id=>document.getElementById(id);
+function render(){
+ const x=items[i]; $("name").textContent=x.name;$("cat").textContent=x.cat+" · FEATURED";$("desc").textContent=x.desc;$("price").textContent="₱"+x.price.toLocaleString();$("img").src=x.img;$("img").alt=x.name;
+ $("dots").innerHTML=items.map((_,n)=>'<span class="dot '+(n===i?'on':'')+'"></span>').join("");
+}
+function move(d){$("food").classList.add("swap");setTimeout(()=>{i=(i+d+items.length)%items.length;render();$("food").classList.remove("swap")},220)}
+function restart(){clearInterval(timer);if(playing)timer=setInterval(()=>move(1),4500)}
+$("prev").onclick=()=>{move(-1);restart()};$("next").onclick=()=>{move(1);restart()};
+$("play").onclick=()=>{playing=!playing;$("play").textContent=playing?"Ⅱ PAUSE":"▶ PLAY";restart()};
+function openDetail(){const x=items[i];qty=1;size=x.sizes[0];$("mName").textContent=x.name;$("mDesc").textContent=x.desc;$("qty").textContent=qty;$("sizes").innerHTML=x.sizes.map((s,n)=>'<span class="choice '+(!n?'selected':'')+'" data-size="'+s+'">'+s+'</span>').join("");$("detail").classList.add("open")}
+$("food").onclick=openDetail;$("food").onkeydown=e=>{if(e.key==="Enter"||e.key===" ")openDetail()};
+$("sizes").onclick=e=>{if(!e.target.dataset.size)return;size=e.target.dataset.size;[...$("sizes").children].forEach(x=>x.classList.toggle("selected",x===e.target))};
+$("minus").onclick=()=>{$("qty").textContent=qty=Math.max(1,qty-1)};$("plus").onclick=()=>{$("qty").textContent=qty=Math.min(20,qty+1)};
+$("add").onclick=()=>{cart.push({...items[i],qty,size});$("count").textContent=cart.reduce((a,x)=>a+x.qty,0);$("detail").classList.remove("open");toast("Added to your table order");renderCart()};
+function renderCart(){if(!cart.length){$("cartList").innerHTML='<p class="desc">Your order is empty.</p>';$("total").textContent="Total · ₱0";return} $("cartList").innerHTML=cart.map(x=>'<div class="cartItem"><span>'+x.qty+'× '+x.name+'<br><small>'+x.size+'</small></span><b>₱'+(x.price*x.qty).toLocaleString()+'</b></div>').join("");$("total").textContent="Total · ₱"+cart.reduce((a,x)=>a+x.price*x.qty,0).toLocaleString()}
+$("cartBtn").onclick=()=>{renderCart();$("cart").classList.add("open")};document.querySelectorAll("[data-close]").forEach(b=>b.onclick=()=>$(b.dataset.close).classList.remove("open"));
+$("checkout").onclick=()=>{if(!cart.length){toast("Add an item first");return}cart=[];$("count").textContent="0";$("cart").classList.remove("open");toast("Demo order complete — thank you!")};
+function toast(t){$("toast").textContent=t;$("toast").classList.add("show");setTimeout(()=>$("toast").classList.remove("show"),1800)}
+render();restart();
+</script></body></html>
